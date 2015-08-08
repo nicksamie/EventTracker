@@ -1,4 +1,4 @@
-<?php include 'layout/header.php';?>
+<?php include ("layouts/header.php");?>
 
     <!-- Header Carousel -->
     <header id="myCarousel" class="carousel slide">
@@ -94,4 +94,4 @@
 
        
     <!-- FOOTER Content-->
-    <?php include 'layout/footer.php';?>
+    <?php include ("layouts/footer.php");?>

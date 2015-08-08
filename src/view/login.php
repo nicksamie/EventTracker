@@ -1,23 +1,49 @@
-<?php require_once("../includes/session.php"); ?>
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
-<?php require_once("../includes/validation_functions.php"); ?>
+<?php //require_once("../includes/validation_functions.php"); ?>
 
 <?php
-$username = "";
-
-if (isset($_POST['submit'])) {
-  // Process the form
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    echo $email . $password;
+    global $connection;
+    /* retrieve all rows from myCity */
+    $query = "SELECT email, password FROM user where email =  '$email'";
+    echo $query;
+    confirm_query($query);
+   //if ($result = $connection->query($query)) {
+    $result = mysqli_query($connection, $query);
+    if (mysqli_num_rows($result) > 0) {
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $email = $row["email"];
+            $pass = $row["password"];
+        }
+    } else{
+      echo "No results matched";
+    }
+    mysqli_close($connection);
+  //$check_valid_user = attempt_login($email, $password);
+  if($password == $pass){
+    //success
+    echo "Validated !";
+      redirect_to("home.php");
+      } else {
+        echo "password doesn not match!";
+    }
   
-  // validations
-  $required_fields = array("username", "password");
+}
+
+?>
+<!--   // validations
+ /* $required_fields = array("username", "password");
   validate_presences($required_fields);
   
   if (empty($errors)) {
     // Attempt Login
 
-		$username = $_POST["username"];
-		$password = $_POST["password"];
+		
 		
 		$found_admin = attempt_login($username, $password);
 
@@ -35,31 +61,5 @@ if (isset($_POST['submit'])) {
 } else {
   // This is probably a GET request
   
-} // end: if (isset($_POST['submit']))
-
-?>
-
-<?php $layout_context = "admin"; ?>
-<?php include("../includes/layouts/header.php"); ?>
-<div id="main">
-  <div id="navigation">
-    &nbsp;
-  </div>
-  <div id="page">
-    <?php echo message(); ?>
-    <?php echo form_errors($errors); ?>
-    
-    <h2>Login</h2>
-    <form action="login.php" method="post">
-      <p>Username:
-        <input type="text" name="username" value="<?php echo htmlentities($username); ?>" />
-      </p>
-      <p>Password:
-        <input type="password" name="password" value="" />
-      </p>
-      <input type="submit" name="submit" value="Submit" />
-    </form>
-  </div>
-</div>
-
-<?php include("../includes/layouts/footer.php"); ?>
+} // end: if (isset($_POST['submit']))*/
+ -->
