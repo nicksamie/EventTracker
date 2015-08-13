@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,35 +13,29 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <!--CSS for validation -->
+     <link href="css/validation.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".close").click(function(){
-		$("#myAlert").alert('close');
-	});
-});  
-</script>
-<style type="text/css">
-	.bs-example{
-		margin: 20px;
-	}
-</style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        	$(".close").click(function(){
+        		$("#myAlert").alert('close');
+        	});
+        });  
+        </script>
+        <style type="text/css">
+        	.bs-example{
+        		margin: 20px;
+        }
+    </style>
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -54,7 +47,7 @@ $(document).ready(function(){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Event Notifier</a>
+                <a class="navbar-brand" href="index.php">Event Notifier</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -107,9 +100,11 @@ $(document).ready(function(){
     </nav>
 <!-- END OF HEADER-->
 
-  <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+  <!-- jQuery-->
+    <script src="js/jquery.js"></script> 
 
+    <script src="js/jquery.min..js"></script>
+    <script src="js/jquery.validate.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
