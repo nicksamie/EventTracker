@@ -1,5 +1,11 @@
+<?php require_once("../includes/db_connection.php"); ?>
+<?php require_once("../includes/functions.php"); ?>
 <?php include ("layouts/header.php");?>
 
+<?php  if(isset($_SESSION['s_firstname'])){
+    echo "Welcome," . $_SESSION['s_firstname'];
+}
+?>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -11,19 +17,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Event Notifier</a>
+                <a class="navbar-brand" href="index.php">Event Notifier</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-						<button type="button" class="btn btn-primary btn-md" style="margin-top:8px;">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Create New Event</button>
+						<button type="button" class="btn btn-primary btn-md" style="margin-top:8px;">
+                        <a href="add_new_event.php">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Create New Event</a>
+                        </button>
                     </li>
                     <li>
 						<button type="button" class="btn btn-primary btn-md" style="margin-top:8px;">My Profile</button>
                     </li>
          			 <li>
-							<button type="button" class="btn btn-primary btn-md" style="margin-top:8px;">Logout</button>
+						<button type="button" class="btn btn-primary btn-md" style="margin-top:8px;">Logout</button>
           			</li>
                 </ul>
             </div>
@@ -133,7 +142,6 @@
                 </div>
             </div>
         </div>
-
 				<!--Pagination-->
 			<div id="paginate">
 				<ul class="pagination pagination-lg">
@@ -147,7 +155,6 @@
 				</ul>
 			</div>
 		        <!-- Pagination -->
-
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -156,16 +163,13 @@
                 </div>
             </div>
         </footer>
-
     </div>
     <!-- /.container -->
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
     <!-- Script to Activate the Carousel -->
     <script>
     $('.carousel').carousel({
