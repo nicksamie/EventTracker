@@ -1,10 +1,12 @@
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
 <?php include ("layouts/header.php");?>
+<?php
 
-<?php  if(isset($_SESSION['s_firstname'])){
-    echo "Welcome," . $_SESSION['s_firstname'];
-}
+    session_start();
+    if(isset($_SESSION['email']) && $_SESSION['s_user_role'] == 'organizer') {
+
+    }
 ?>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

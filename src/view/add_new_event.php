@@ -1,6 +1,6 @@
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
-<?php  include ("layouts/header.php");?>
+<?php  include ("layouts/header_admin.php");?>
 
 <title>Add New Event</title>
     <!-- Navigation -->
@@ -35,13 +35,49 @@
 <form id="addevent-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 	<div class="form-group">
         	<h4>Event Name:</h4> <input type="text" name="eventname" class="form-control input-lg" placeholder="Eventname">
-    	</div>
+    	</div>   
+       <!--  <select name="eventtype" style="width:150px">
+            <option value="Select Option">Select Option</option>
+            <option value="Sports">Sports</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Tourism">Tourism</option>
+        </select> --> 
+        <div class="form-group">
+           <h4>Event Type:</h4> 
+                <select id="eventtype" name="eventtype" class="form-control input-lg" >
+                        <option value="">Select Event Type Option</option>
+                        <option value="sports">Sports</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="tourism">Tourism</option>
+                </select>
+        </div>
     <div class="form-group">
         	<h4>Date:</h4> <input type="date" name="date" class="form-control input-lg" placeholder="Date">
     	</div>
     <div class="form-group">
         	<h4>Time:</h4> <input type="time" name="time" class="form-control input-lg" placeholder="Time">
-    	</div>
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(function () {
+                            $('#datetimepicker3').datetimepicker({
+                                format: 'LT'
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+    	    </div>
     <div class="form-group">
         	<h4>Venue:</h4> <input type="text" name="venue" class="form-control input-lg" placeholder="Venue">
     	</div>
@@ -95,40 +131,44 @@
 })(jQuery, window, document);
 </script>
 
+ <script src="js/bootstrap-datetimepicker.js"></script>
+ 
 <?php
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		global $connection; // Establishing Connection with Server
-
-	    // Fetching variables of the form which travels in URL
-		$eventname = $_POST['eventname'];
-		$date = $_POST['date'];
-		$time = $_POST['time'];
-		$venue = $_POST['venue'];
-		$description=$_POST['description'];
-		echo $eventname;
-		echo $date;
-		echo $time;
-		echo $venue;
-		echo $description;
-		//Insert Query of SQL
-		$addeventquery = "INSERT into event ";
-		$addeventquery .= "(event_name, event_date, event_time, event_venue, event_detail)";
-		$addeventquery .= "VALUES (?,?,?,?,?)";
-			
-			//"		('$eventname', '$date', '$time', '$venue','$description')";
-		//if($connection->query($sql)===TRUE){
-		if ($stmt = $connection->prepare($addeventquery))
-		{
-			global $eventname, $date, $time ,$venue, $description;
-			$stmt->bind_param("sssss", $eventname, $date, $time, $venue, $description);
-			 /* execute query */
-	        if($stmt->execute())
-	        {
-				echo "Data Inserted successfully...!!";
-			}else{
-				echo "error: ". $addeventquery. "<br>".$connection->error;
-			}
-		}
+        if(empty($_POST['eventname']) || empty($_POST['date']) || empty($_POST['time']) || empty($_POST['venue']) ||  empty($_POST['description'])){
+                echo "Either one of the arguments Missing!";
+                return false;
+        } else {
+            // Fetching variables of the form which travels in URL
+    		$eventname = $_POST['eventname'];
+    		$date = $_POST['date'];
+    		$time = $_POST['time'];
+    		$venue = $_POST['venue'];
+    		$description = $_POST['description'];
+    		echo $eventname;
+    		echo $date;
+    		echo $time;
+    		echo $venue;
+    		echo $description;
+    		//Insert Query of SQL
+    		$addeventquery = "INSERT into event ";
+    		$addeventquery .= "(event_name, event_date, event_time, event_venue, event_detail)";
+    		$addeventquery .= "VALUES (?,?,?,?,?)";
+    			
+    			//"		('$eventname', '$date', '$time', '$venue','$description')";
+    		//if($connection->query($sql)===TRUE){
+    		if ($stmt = $connection->prepare($addeventquery)){
+    			global $eventname, $date, $time ,$venue, $description;
+    			$stmt->bind_param("sssss", $eventname, $date, $time, $venue, $description);
+    			 /* execute query */
+    	        if($stmt->execute()){
+    				echo "Data Inserted successfully...!!";
+    			}else{
+    				echo "error: ". $addeventquery. "<br>".$connection->error;
+    			}
+    		}
+        }
 		//$connection->close(); // Closing Connection with Server
 	}
 ?>

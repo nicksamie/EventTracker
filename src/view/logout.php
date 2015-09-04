@@ -1,8 +1,9 @@
 <?php
-	// v1: simple logout
 	session_start();
-	session_destroy();
-	echo "You've logged Out!";
+	if(session_destroy()) // Destroying All Sessions
+	{
+		header("Location: index.php"); // Redirecting To login page
+	}
 	/*$_SESSION["s_email"] = null;
 	$_SESSION["firstname"] = null;
 	redirect_to("index.php");*/

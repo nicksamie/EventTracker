@@ -1,5 +1,5 @@
 <?php
-	define("DB_SERVER", "localhost:3306");
+	define("DB_SERVER", "localhost");
 	define("DB_USER", "root");
 	define("DB_PASS", "root");
 	define("DB_NAME", "eventtracker");
@@ -9,6 +9,7 @@
   // Test if connection succeeded
   if(mysqli_connect_errno()) {
     die("Database connection failed: " . 
+      mysqli_error($connection) .
          mysqli_connect_error() . 
          " (" . mysqli_connect_errno() . ")"
     );

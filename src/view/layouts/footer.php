@@ -1,13 +1,11 @@
         <!-- Footer -->
-        <footer>
+      <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p style="text-align:center">Copyright  &copy; <?php echo date("Y"); ?>, Event Tracker </p>
+                    <p style="text-align:center">Copyright &copy; Event Tracker 2015</p>
                 </div>
             </div>
         </footer>
-
-    </div>
 </body>
 </html>
 

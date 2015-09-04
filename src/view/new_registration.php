@@ -8,36 +8,39 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
      echo "register submitted";
     // define variables and set to empty values
-    $firstname = $lastname = $user_role = $orgname = $email = $password = "";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-       /* if(empty($_POST['firstname']) || empty($_POST['lastname']) ||
-           empty($_POST['email']) || empty($_POST['password']) )
-           {
-                echo "Either one of the arguments Missing!";
-                return false;
-           } else {
-              $user_role = $_POST["selectuser"];
-              $firstname = $_POST["firstname"];
-              $lastname = $_POST["lastname"];
-              $orgname = $_POST["orgname"];
-              $email = $_POST["email"];
-              $password = $_POST["password"];
-            }*/
-           $user_role = $_POST["selectuser"];
-           if($user_role == "normaluser"){
-              $firstname = $_POST["firstname"];
-              $lastname = $_POST["lastname"];
-              $orgname = null;
-           } else if ($user_role == "organizer") {
-              $orgname = $_POST["orgname"];
-              $firstname = null;
-              $lastname = null;
-           }
-            
-              $email = $_POST["email"];
-              $password = $_POST["password"];
+   // $firstname = $lastname = $user_role = $orgname = $email = $password = "";
+    global $user_role;
+    $role = $_POST["selectuser"];
+    
+    function check_empty($user_role){
+      if($user_role == "normaluser"){
+        if(empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['email']) || empty($_POST['password']) )
+            return false;
+      } else if ($user_role == "organizer") {
+        if(empty($_POST['orgname']) || empty($_POST['email']) || empty($_POST['password']) )
+            return false;
+      } else {
+        return true;
+      }
     }
+
+    if(check_empty($role)){  
+       // global $user_role;           
+               if($user_role == "normaluser"){
+                  $firstname = $_POST["firstname"];
+                  $lastname = $_POST["lastname"];
+                  $orgname = null;
+               } else if ($user_role == "organizer") {
+                  $orgname = $_POST["orgname"];
+                  $firstname = null;
+                  $lastname = null;
+               }           
+              $email = $_POST["email"];
+              $password = $_POST["password"];
+          } else {
+              echo "Either one of the arguments Missing!";
+              return false;
+          }
 
     function insertIntoDatabase(){  
         // Create connection
@@ -56,13 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             /* execute query */
             if($stmt->execute()){
                 echo "successfully executed";
-
-            }else{
+            } else {
                 echo "Failed to execute" .$connection->error;
             }
-
         }
     }
+
     insertIntoDatabase();
 }
 ?>
